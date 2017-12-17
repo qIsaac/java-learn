@@ -1,0 +1,23 @@
+@startuml
+interface Troll{
+  + void attack();
+  + int getAttackPower();
+  + void fleeBattle();
+}
+class SimpleTroll{
+   + void attack(){}
+   + int getAttackPower(){}
+   + void fleeBattle(){}
+}
+class Clubbed{
+  - Troll decorated;
+  + ClubbedTroll(Troll decorated) {}
+  + void attack(){}
+  + int getAttackPower(){}
+  + void fleeBattle(){}
+}
+class Cl
+Troll<|--SimpleTroll
+Troll<|--Clubbed
+Clubbed o-- Troll :aggregation
+@enduml
