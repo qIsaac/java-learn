@@ -29,8 +29,7 @@ public class MergeSort implements Sort{
             }else if (j > r){
                 arr[k] = aux[i-l];
                 i++;
-            }
-            if (aux[i - l].compareTo(aux[j - l]) < 0) {
+            }else if (aux[i - l].compareTo(aux[j - l]) < 0) {
                 arr[k] = aux[i - l];
                 i++;
             } else {
