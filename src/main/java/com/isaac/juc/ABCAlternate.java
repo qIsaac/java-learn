@@ -9,7 +9,7 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class ABCAlternate {
     public static void main(String [] args){
-        AlternateDemo ad = new AlternateDemo();
+       final AlternateDemo ad = new AlternateDemo();
         new Thread(new Runnable() {
             @Override
             public void run() {
