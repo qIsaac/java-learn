@@ -21,11 +21,6 @@ public class App {
         executor.execute(arr);
         long endTime = System.currentTimeMillis();
         System.out.println( SortExecutor.class.getSimpleName()+ " : " + (endTime-startTime) + "ms" );
-        executor.changeSort(new InsertionSort());
-        executor.execute(arr);
-        long endTime1 = System.currentTimeMillis();
-        System.out.println( SortExecutor.class.getSimpleName()+ " : " + (endTime1-endTime) + "ms" );
-
     }
 
 }
