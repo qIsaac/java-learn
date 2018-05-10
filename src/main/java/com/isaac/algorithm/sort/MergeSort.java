@@ -1,56 +1,60 @@
 package com.isaac.algorithm.sort;
 
-import java.nio.channels.SocketChannel;
 import java.util.Arrays;
 
 /**
- * Created by Isaac on 2017/12/19.
+ * @Author : Isaac
+ * @Description:
+ * @Date :Created in 17:08 2018/5/10
  */
-public class MergeSort implements Sort{
-    @Override
-    public void sort(Comparable[] arr) {
+public class MergeSort implements  Sort{
+    // 我们的算法类不允许产生任何实例
 
-    }
+    // 将arr[l...mid]和arr[mid+1...r]两部分进行归并
+    private static void merge(Comparable[] arr, int l, int mid, int r) {
 
-    /**
-     * 对arr[l...mid] 和arr[mid+1 ....r] 范围内进行排序
-     * @param arr
-     * @param l
-     * @param mid
-     * @param r
-     */
-    private static void merge(Comparable[] arr, int l, int mid, int r){
-       Comparable[] aux = Arrays.copyOfRange(arr,l,r+1);
-       int i = l,j = mid+1;
-        for (int k = l; k <= r; k++) {
-            if (i > mid) {
-                arr[k] = aux[j-l];
-                j++;
-            }else if (j > r){
-                arr[k] = aux[i-l];
-                i++;
-            }else if (aux[i - l].compareTo(aux[j - l]) < 0) {
-                arr[k] = aux[i - l];
-                i++;
-            } else {
-                arr[k] = aux[j - l];
-                j++;
+        Comparable[] aux = Arrays.copyOfRange(arr, l, r+1);
+
+        // 初始化，i指向左半部分的起始索引位置l；j指向右半部分起始索引位置mid+1
+        int i = l, j = mid+1;
+        for( int k = l ; k <= r; k ++ ){
+
+            if( i > mid ){  // 如果左半部分元素已经全部处理完毕
+                arr[k] = aux[j-l]; j ++;
+            }
+            else if( j > r ){   // 如果右半部分元素已经全部处理完毕
+                arr[k] = aux[i-l]; i ++;
+            }
+            else if( aux[i-l].compareTo(aux[j-l]) < 0 ){  // 左半部分所指元素 < 右半部分所指元素
+                arr[k] = aux[i-l]; i ++;
+            }
+            else{  // 左半部分所指元素 >= 右半部分所指元素
+                arr[k] = aux[j-l]; j ++;
             }
         }
     }
-    /**
-     * 对arr[l...r] 范围内进行排序
-     * @param arr
-     * @param l
-     * @param r
-     */
-    private void sort(Comparable[] arr,int l,int r) {
-        if (l >= r) {
-            return ;
+
+    // 递归使用归并排序,对arr[l...r]的范围进行排序
+    private static void sort(Comparable[] arr, int l, int r) {
+
+        // 优化2: 对于小规模数组, 使用插入排序
+        if( r - l <= 15 ){
+            InsertionSort.sort(arr, l, r);
+            return;
         }
-        int mid = (l+r)/2;//当l和r非常大的时候发生溢出
-        sort(arr,l,mid);
-        sort(arr,mid+1,r);
-        merge(arr,l,mid,r);
+
+        int mid = (l+r)/2;
+        sort(arr, l, mid);
+        sort(arr, mid + 1, r);
+
+        // 优化1: 对于arr[mid] <= arr[mid+1]的情况,不进行merge
+        // 对于近乎有序的数组非常有效,但是对于一般情况,有一定的性能损失
+        if( arr[mid].compareTo(arr[mid+1]) > 0 )
+            merge(arr, l, mid, r);
+    }
+
+    public  void sort(Comparable[] arr){
+        int n = arr.length;
+        sort(arr, 0, n-1);
     }
 }

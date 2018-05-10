@@ -32,3 +32,5 @@ target/
 #system file
 .DS_Store
 Thumbs.db
+/java-learn.ipr
+/java-learn.iml
