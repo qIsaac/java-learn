@@ -1,6 +1,5 @@
-package com.isaac.guava;
+package com.isaac.guava.base;
 
-import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 
 /**

@@ -1,4 +1,4 @@
-package com.isaac.guava;
+package com.isaac.guava.base;
 
 import com.google.common.collect.Ordering;
 
