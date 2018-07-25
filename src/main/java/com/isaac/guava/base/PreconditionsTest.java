@@ -7,9 +7,9 @@ import com.google.common.base.Preconditions;
  * @Description:
  * @Date :Created in 16:49 2017/10/30
  */
-public class OptionalTest {
+public class PreconditionsTest {
     public static void main(String[] args) {
-        OptionalTest guavaTester = new OptionalTest();
+        PreconditionsTest guavaTester = new PreconditionsTest();
         try {
             System.out.println(guavaTester.sqrt(3.0));
         }catch(IllegalArgumentException e){
